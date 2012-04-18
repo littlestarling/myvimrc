@@ -1,105 +1,175 @@
-scriptencoding utf-8
 set nocompatible
 filetype off
 set rtp+=~/dotfiles/vimfiles/vundle.git/
 call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'git-commit'
+Bundle 'YankRing.vim'
+Bundle 'EasyMotion'
+Bundle 'vimwiki'
+Bundle 'Rename'
+Bundle 'wincent/Command-T'
+Bundle 'jade.vim'
+
+Bundle 'newspaper.vim'
+Bundle 'xoria256.vim'
+
+Bundle 'vim-ruby/vim-ruby'
+
+Bundle 'tsukkee/unite-help'
+
+Bundle 'kana/vim-textobj-user'
+Bundle 'kana/vim-textobj-fold'
+Bundle 'kana/vim-textobj-indent'
+Bundle 'kana/vim-textobj-lastpat'
+
 Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/vimfiler'
 Bundle 'Shougo/unite.vim'
-Bundle 'thinca/vim-ref'
-Bundle 'thinca/vim-quickrun'
-filetype plugin indent on      " required!
-imap { {}<Left>
-imap [ []<Left>
-imap ( ()<Left>
-imap < <><Left>
-imap "" ""<Left>
-imap '' ''<Left>
-imap `` ``<Left>
-imap #!9 # -*- coding: utf-8 -*-
-set tabstop=2
+
+Bundle 'h1mesuke/vim-alignta'
+Bundle 'h1mesuke/unite-outline'
+
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-cucumber'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+
+Bundle 'kenchan/vim-ruby-refactoring'
+Bundle 'nelstrom/vim-textobj-rubyblock'
+
+Bundle 'basyura/unite-rails'
+
+Bundle 'scrooloose/nerdtree'
+
+filetype plugin indent on
+syntax enable
+
+set t_Co=256
+set background=dark
+colorscheme xoria256
+hi Pmenu ctermbg=4
+
+set ambiwidth=double
+set autoread
+set hidden
+set number
+set showmatch
+set ttymouse=xterm2
+set wildmode=longest:list
+set nocompatible
+
+set directory-=.
+
+"backup
+set nobackup
+
+"encoding
+set enc=utf-8
+set fenc=utf-8
+set fencs=utf-8,iso-2022-jp,euc-jp,cp932
+set fileformats=unix,dos
+
+"Tab
 set expandtab
-set lcs=tab:>-,eol:^,trail:_,extends:~
-highlight IdeographicSpace cterm=underline ctermbg=DarkGreen guibg=DarkGreen
-au VimEnter,WinEnter * match IdeographicSpace /　/
-	" Disable AutoComplPop.
-	let g:acp_enableAtStartup = 0
-	" Use neocomplcache.
-	let g:neocomplcache_enable_at_startup = 1
-	" Use smartcase.
-	let g:neocomplcache_enable_smart_case = 1
-	" Use camel case completion.
-	let g:neocomplcache_enable_camel_case_completion = 1
-	" Use underbar completion.
-	let g:neocomplcache_enable_underbar_completion = 1
-	" Set minimum syntax keyword length.
-	let g:neocomplcache_min_syntax_length = 3
-	let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-	
-	" Define dictionary.
-	let g:neocomplcache_dictionary_filetype_lists = {
-	    \ 'default' : '',
-	    \ 'vimshell' : $HOME.'/.vimshell_hist',
-	    \ 'scheme' : $HOME.'/.gosh_completions'
-	        \ }
-		
-	" Define keyword.
-	if !exists('g:neocomplcache_keyword_patterns')
-	    let g:neocomplcache_keyword_patterns = {}
-	endif
-	let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-	
-	" Plugin key-mappings.
-	imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-	smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-	inoremap <expr><C-g>     neocomplcache#undo_completion()
-	inoremap <expr><C-l>     neocomplcache#complete_common_string()
-	
-	" SuperTab like snippets behavior.
-	"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? \"\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? \"\<C-n>\" : \"\<TAB>"
-	
-	" Recommended key-mappings.
-	" <CR>: close popup and save indent.
-	inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-	" <TAB>: completion.
-	"inoremap <expr><TAB>  pumvisible() ? \"\<C-n>" : \"\<TAB>\"
-	" <C-h>, <BS>: close popup and delete backword char.
-	inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-	inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-	inoremap <expr><C-y>  neocomplcache#close_popup()
-	inoremap <expr><C-e>  neocomplcache#cancel_popup()
-	
-	" AutoComplPop like behavior.
-	"let g:neocomplcache_enable_auto_select = 1
-	
-	" Shell like behavior(not recommended).
-	"set completeopt+=longest
-	"let g:neocomplcache_enable_auto_select = 1
-	"let g:neocomplcache_disable_auto_complete = 1
-	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-	"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-	
-	" Enable omni completion.
-	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-	
-	" Enable heavy omni completion.
-	if !exists('g:neocomplcache_omni_patterns')
-		let g:neocomplcache_omni_patterns = {}
-	endif
-	let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-	"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-	let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-	let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-	let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+set smartindent
+set ts=2 sw=2 sts=2
 
-function! RTrim()
-  let s:cursor = getpos(".")
-  %s/\s\+$//e
-  %s/　\+$//e
-  call setpos(".", s:cursor)
-endfunction
-autocmd BufWritePre *.php,*.rb,*.js,*.c,*.cpp,*.css,*.java,*.pl,*.conf call RTrim()
+"search
+set nohlsearch
+set ignorecase
+set smartcase
+set incsearch
 
+"statusline
+set laststatus=2
+set statusline=%<%f\ %y\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%=%l,%3c
+
+" keymap
+nnoremap j gj
+nnoremap k gk
+
+nnoremap wh <C-w>h
+nnoremap wj <C-w>j
+nnoremap wk <C-w>k
+nnoremap wl <C-w>l
+
+nnoremap Y y$
+
+nnoremap <Space>. :<C-u>edit $MYVIMRC<CR>
+nnoremap <Space>s. :<C-u>source $MYVIMRC<CR>
+
+cnoremap <C-a> <Home>
+cnoremap <C-x> <C-r>=expand('%:p:h')<CR>/
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+
+nmap <Leader>n :NERDTreeToggle<CR>
+
+" 全角空白と行末の空白の色を変える
+highlight WideSpace ctermbg=blue guibg=blue
+highlight EOLSpace ctermbg=red guibg=red
+
+function! s:HighlightSpaces()
+  match WideSpace /　/
+  match EOLSpace /\s\+$/
+endf
+
+" clipboard
+set clipboard+=unnamed
+
+" <Leader>
+inoremap <Leader>date <C-R>=strftime('%Y/%m/%d(%a)')<CR>
+inoremap <Leader>time <C-R>=strftime('%H:%M:%S')<CR>
+
+" git-commit.vim
+let git_diff_spawn_mode = 1
+
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 0
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+
+" unite.vim
+nnoremap <silent> ,uf :<C-u>Unite file<CR>
+nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> ,uo :<C-u>Unite outline<CR>
+nnoremap <silent> ,uh :<C-u>Unite help<CR>
+
+" vimwiki
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]
+
+let g:EasyMotion_leader_key = '<Leader>m'
+
+" vimfiler
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
+
+augroup MyAutoCmd
+  autocmd!
+
+  au BufRead,BufNewFile *.haml set ft=haml
+  au BufRead,BufNewFile *.sass set ft=sass
+
+  autocmd BufRead * call s:HighlightSpaces()
+  autocmd WinEnter * call s:HighlightSpaces()
+
+  autocmd InsertEnter * highlight StatusLine ctermfg=red guifg=red
+  autocmd InsertLeave * highlight StatusLine ctermfg=white guifg=white
+
+  "自動的に QuickFix リストを表示する
+  autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd cwin
+  autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
+
+  autocmd BufRead,BufNewFile COMMIT_EDITMSG set filetype=git
+
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC | if has('gui_running') | source $MYGVIMRC
+  autocmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
+augroup END
