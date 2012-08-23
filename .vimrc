@@ -1,7 +1,11 @@
 set nocompatible
 filetype off
-set rtp+=~/dotfiles/vimfiles/vundle.git/
+set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
+
+if filereadable(expand('~/.vim/recognize_charcode.vim'))
+  source ~/.vim/recognize_charcode.vim
+endif
 
 Bundle 'gmarik/vundle'
 
@@ -39,7 +43,6 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 
-Bundle 'kenchan/vim-ruby-refactoring'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 
 Bundle 'basyura/unite-rails'
@@ -72,7 +75,55 @@ set nobackup
 set enc=utf-8
 set fenc=utf-8
 set fencs=utf-8,iso-2022-jp,euc-jp,cp932
-set fileformats=unix,dos
+set fileformats=unix,dos,mac
+
+if &encoding !=# 'utf-8'
+  set encoding=japan
+  set fileencoding=japan
+endif
+if has('iconv')
+  let s:enc_euc = 'euc-jp'
+  let s:enc_jis = 'iso-2022-jp'
+  " checking iconv applied eucJP-ms
+  if iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\cad\ccb"
+    let s:enc_uec = 'eucjp-ms'
+    let s:enc_jis = 'iso-2022-jp-3'
+  endif
+  if &encoding ==# 'utf-8'
+    let s:fileencodings_default = &fileencodings
+    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+    let &fileencodings = &fileencodings .','. s:fileencodings_default
+    unlet s:fileencodings_default
+  else
+    let &fileencodings = &fileencodings .','. s:enc_jis
+    set fileencodings+=utf-8,ucs-2le,ucs-2
+    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+      set fileencodings+=cp932
+      set fileencodings-=euc-jp
+      set fileencodings-=euc-jisx0213
+      set fileencodings-=eucjp-ms
+      let &encoding = s:enc_euc
+      let &fileencodings = s:enc_euc
+    else
+      let &fileencodings = &fileencodings .','. s:enc_euc
+    endif
+  endif
+  unlet s:enc_euc
+  unlet s:enc_jis
+endif
+
+if has('autocmd')
+  function! AU_ReCheck_FENC()
+    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+      let &fileencoding=&encoding
+    endif
+  endfunction
+  autocmd BufReadPost * call AU_ReCheck_FENC()
+endif
+
+if exists('&ambiwidth')
+  set ambiwidth=double
+endif
 
 "Tab
 set expandtab
@@ -118,6 +169,15 @@ function! s:HighlightSpaces()
   match EOLSpace /\s\+$/
 endf
 
+function! s:remove_dust()
+  let cursor = getpos(".")
+  %s/\s\+$//ge
+  %s/\t/  /ge
+  call setpos(".", cursor)
+  unlet cursor
+endfunction
+autocmd BufWritePre * call <SID>remove_dust()
+
 " clipboard
 set clipboard+=unnamed
 
@@ -135,6 +195,9 @@ let g:neocomplcache_enable_camel_case_completion = 0
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 
+
+
+
 " unite.vim
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
@@ -151,6 +214,10 @@ let g:EasyMotion_leader_key = '<Leader>m'
 " vimfiler
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
+
+" yankring
+let g:vimfiler_as_default_explorer = 1
+let g:yankring_manual_clipboard_check = 0
 
 augroup MyAutoCmd
   autocmd!
