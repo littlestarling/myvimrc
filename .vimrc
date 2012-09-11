@@ -1,56 +1,46 @@
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+  call neobundle#rc(expand('~/.vim/bundle/'))
+endif
 
 if filereadable(expand('~/.vim/recognize_charcode.vim'))
   source ~/.vim/recognize_charcode.vim
 endif
 
-Bundle 'gmarik/vundle'
+NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc', {'build' : {'mac' : 'make -f make_mac.mak', },}
+NeoBundle 'tpope/vim-endwise.git'
+NeoBundle 'ruby-matchit'
 
-Bundle 'git-commit'
-Bundle 'YankRing.vim'
-Bundle 'EasyMotion'
-Bundle 'vimwiki'
-Bundle 'Rename'
-Bundle 'wincent/Command-T'
-Bundle 'jade.vim'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache-snippets-complete'
+NeoBundle 'taichouchou2/vim-rsense'
 
-Bundle 'newspaper.vim'
-Bundle 'xoria256.vim'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'taichouchou2/surround.vim'
 
-Bundle 'vim-ruby/vim-ruby'
+NeoBundle 'taichouchou2/vim-rails'
+NeoBundle 'romanvbabenko/rails.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'ujihisa/unite-rake'
+NeoBundle 'basyura/unite-rails'
 
-Bundle 'tsukkee/unite-help'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'taichouchou2/vim-ref-ri'
+NeoBundle 'taq/vim-rspec'
 
-Bundle 'kana/vim-textobj-user'
-Bundle 'kana/vim-textobj-fold'
-Bundle 'kana/vim-textobj-indent'
-Bundle 'kana/vim-textobj-lastpat'
-
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/vimfiler'
-Bundle 'Shougo/unite.vim'
-
-Bundle 'h1mesuke/vim-alignta'
-Bundle 'h1mesuke/unite-outline'
-
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-
-Bundle 'nelstrom/vim-textobj-rubyblock'
-
-Bundle 'basyura/unite-rails'
-
-Bundle 'scrooloose/nerdtree'
+NeoBundle 'VimClojure'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'jpalardy/vim-slime'
+NeoBundle 'scrooloose/syntastic'
+""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 
 filetype plugin indent on
-syntax enable
+filetype indent on
+syntax on
 
 set t_Co=256
 set background=dark
@@ -194,9 +184,6 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 0
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
-
-
-
 
 " unite.vim
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
