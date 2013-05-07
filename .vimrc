@@ -1,50 +1,57 @@
 set nocompatible
 filetype off
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle/'))
-endif
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
 
 if filereadable(expand('~/.vim/recognize_charcode.vim'))
   source ~/.vim/recognize_charcode.vim
 endif
 
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc', {'build' : {'mac' : 'make -f make_mac.mak', },}
-NeoBundle 'tpope/vim-endwise.git'
-NeoBundle 'ruby-matchit'
+Bundle 'gmarik/vundle'
+Bundle 'git-commit'
+Bundle 'YankRing.vim'
+Bundle 'EasyMotion'
+Bundle 'vimwiki'
+Bundle 'Rename'
+Bundle 'wincent/Command-T'
+Bundle 'jade.vim'
+Bundle 'newspaper.vim'
+Bundle 'xoria256.vim'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tsukkee/unite-help'
+Bundle 'kana/vim-textobj-user'
+Bundle 'kana/vim-textobj-fold'
+Bundle 'kana/vim-textobj-indent'
+Bundle 'kana/vim-textobj-lastpat'
 
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
-NeoBundle 'taichouchou2/vim-rsense'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/vimfiler'
+Bundle 'Shougo/unite.vim'
+Bundle 'h1mesuke/vim-alignta'
+Bundle 'h1mesuke/unite-outline'
 
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'taichouchou2/surround.vim'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-cucumber'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
 
-NeoBundle 'taichouchou2/vim-rails'
-NeoBundle 'romanvbabenko/rails.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-rake'
-NeoBundle 'basyura/unite-rails'
+Bundle 'suan/vim-instant-markdown'
 
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'taichouchou2/vim-ref-ri'
-NeoBundle 'taq/vim-rspec'
-
-NeoBundle 'VimClojure'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'jpalardy/vim-slime'
-NeoBundle 'scrooloose/syntastic'
-""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
+Bundle 'nelstrom/vim-textobj-rubyblock'
+Bundle 'basyura/unite-rails'
+Bundle 'scrooloose/nerdtree'
 
 filetype plugin indent on
 filetype indent on
 syntax on
 
 set t_Co=256
-set background=dark
+set background=light
 colorscheme xoria256
+
 hi Pmenu ctermbg=4
 
 set ambiwidth=double
@@ -223,6 +230,7 @@ augroup MyAutoCmd
   autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
 
   autocmd BufRead,BufNewFile COMMIT_EDITMSG set filetype=git
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
 
   autocmd BufWritePost $MYVIMRC source $MYVIMRC | if has('gui_running') | source $MYGVIMRC
   autocmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
