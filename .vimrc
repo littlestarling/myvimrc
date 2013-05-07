@@ -42,6 +42,7 @@ Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
 
 Bundle 'nelstrom/vim-textobj-rubyblock'
 
@@ -49,12 +50,15 @@ Bundle 'basyura/unite-rails'
 
 Bundle 'scrooloose/nerdtree'
 
+Bundle 'suan/vim-instant-markdown'
+
 filetype plugin indent on
 syntax enable
 
 set t_Co=256
-set background=dark
+set background=light
 colorscheme xoria256
+
 hi Pmenu ctermbg=4
 
 set ambiwidth=double
@@ -195,9 +199,6 @@ let g:neocomplcache_enable_camel_case_completion = 0
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 
-
-
-
 " unite.vim
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
@@ -236,6 +237,7 @@ augroup MyAutoCmd
   autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
 
   autocmd BufRead,BufNewFile COMMIT_EDITMSG set filetype=git
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
 
   autocmd BufWritePost $MYVIMRC source $MYVIMRC | if has('gui_running') | source $MYGVIMRC
   autocmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
