@@ -44,13 +44,16 @@ Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'basyura/unite-rails'
 Bundle 'scrooloose/nerdtree'
 
+Bundle 'jpo/vim-railscasts-theme'
+
 filetype plugin indent on
 filetype indent on
 syntax on
 
 set t_Co=256
-set background=light
-colorscheme xoria256
+set background=dark
+"colorscheme xoria256
+colorscheme railscasts
 
 hi Pmenu ctermbg=4
 
