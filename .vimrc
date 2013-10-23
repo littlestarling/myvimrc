@@ -1,13 +1,12 @@
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/vundle.git
 call vundle#rc()
 
 if filereadable(expand('~/.vim/recognize_charcode.vim'))
   source ~/.vim/recognize_charcode.vim
 endif
 
-Bundle 'gmarik/vundle'
 Bundle 'git-commit'
 Bundle 'YankRing.vim'
 Bundle 'EasyMotion'
