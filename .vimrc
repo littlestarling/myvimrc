@@ -1,5 +1,6 @@
 set nocompatible
-filetype off
+filetype on
+filetype indent on
 set rtp+=~/.vim/vundle.git
 call vundle#rc()
 
@@ -39,6 +40,9 @@ Bundle 'tpope/vim-markdown'
 
 Bundle 'suan/vim-instant-markdown'
 
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'wavded/vim-stylus'
+
 Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'basyura/unite-rails'
 Bundle 'scrooloose/nerdtree'
@@ -60,11 +64,15 @@ set ambiwidth=double
 set autoread
 set hidden
 set number
+set cursorline
+set ruler
+set laststatus=2
+
 set showmatch
 set ttymouse=xterm2
 set wildmode=longest:list
 set nocompatible
-
+set scrolloff=3
 set directory-=.
 
 "backup
@@ -125,9 +133,40 @@ if exists('&ambiwidth')
 endif
 
 "Tab
+ " 自動的にインデントする (noautoindent:インデントしない)
+ set autoindent
+" タブをスペースに展開しない (expandtab:展開する)
 set expandtab
 set smartindent
 set ts=2 sw=2 sts=2
+"編集に関する設定:
+"タブの画面上での幅
+ set tabstop=2
+"インデントの設定をファイルタイプ別に行う
+" (shiftwidth=スマートインデントの幅)
+" (tabstop=タブの画面上での幅)
+" (softtabstop=??? デフォルトは tabstop と同じらしい)
+
+augroup vimrc
+autocmd! FileType perl setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd! FileType php  setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+autocmd! FileType js   setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd! FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd! FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd! FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
+augroup END
+
+ set expandtab
+ " バックスペースでインデントや改行を削除できるようにする
+ set backspace=indent,eol,start
+ " 検索時にファイルの最後まで行ったら最初に戻る (nowrapscan:戻らない)
+ set wrapscan
+ " 括弧入力時に対応する括弧を表示 (noshowmatch:表示しない)
+ set showmatch
+ " コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
+ set wildmenu
+ " テキスト挿入中の自動折り返しを日本語に対応させる
+ set formatoptions+=mM
 
 "search
 set nohlsearch
