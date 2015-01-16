@@ -51,7 +51,7 @@ Bundle 'jpo/vim-railscasts-theme'
 
 filetype plugin indent on
 filetype indent on
-syntax on
+syntax enable
 
 set t_Co=256
 set background=dark
@@ -68,7 +68,11 @@ set cursorline
 set ruler
 set laststatus=2
 
+set display=lastline
+set pumheight=10
+
 set showmatch
+set matchtime=1
 set ttymouse=xterm2
 set wildmode=longest:list
 set nocompatible
@@ -259,6 +263,7 @@ augroup MyAutoCmd
 
   au BufRead,BufNewFile *.haml set ft=haml
   au BufRead,BufNewFile *.sass set ft=sass
+  au BufRead,BufNewFile *.coffee  set filetype=coffee
 
   autocmd BufRead * call s:HighlightSpaces()
   autocmd WinEnter * call s:HighlightSpaces()
