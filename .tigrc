@@ -1,0 +1,9 @@
+# 水平分割にする
+set vertical-split = no
+
+# 分割下部を広めに
+set split-view-height = 80%
+
+# main viewにコミットIDを表示
+set main-view = id date author commit-title:graph=yes,refs=yes
+
