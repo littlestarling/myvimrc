@@ -1,56 +1,43 @@
-set nocompatible
-filetype on
-filetype indent on
-set rtp+=~/.vim/vundle.git
-call vundle#rc()
+" プラグインが実際にインストールされるディレクトリ
+let s:dein_dir = expand('~/myvimrc/.vim/.cache/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+
+" 設定開始
+call dein#begin(s:dein_dir)
+
+" プラグインリストを収めた TOML ファイル
+let s:toml      = '~/.vim/rc/dein.toml'
+let s:lazy_toml = '~/.vim/rc/dein_lazy.toml'
+
+" TOML を読み込み、キャッシュしておく
+if dein#load_cache([expand('<sfile>'), s:toml, s:lazy_toml])
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#save_cache()
+endif
+
+" 設定終了
+call dein#end()
+
+" もし、未インストールものものがあったらインストール
+if dein#check_install()
+  call dein#install()
+endif
 
 if filereadable(expand('~/.vim/recognize_charcode.vim'))
   source ~/.vim/recognize_charcode.vim
 endif
 
-Bundle 'git-commit'
-Bundle 'YankRing.vim'
-Bundle 'EasyMotion'
-Bundle 'vimwiki'
-Bundle 'Rename'
-Bundle 'wincent/Command-T'
-Bundle 'jade.vim'
-Bundle 'newspaper.vim'
-Bundle 'xoria256.vim'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tsukkee/unite-help'
-Bundle 'kana/vim-textobj-user'
-Bundle 'kana/vim-textobj-fold'
-Bundle 'kana/vim-textobj-indent'
-Bundle 'kana/vim-textobj-lastpat'
-
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/vimfiler'
-Bundle 'Shougo/unite.vim'
-Bundle 'h1mesuke/vim-alignta'
-Bundle 'h1mesuke/unite-outline'
-
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-
-Bundle 'suan/vim-instant-markdown'
-
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'wavded/vim-stylus'
-
-Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'basyura/unite-rails'
-Bundle 'scrooloose/nerdtree'
-
-Bundle 'jpo/vim-railscasts-theme'
-
 filetype plugin indent on
-filetype indent on
 syntax enable
 
 set t_Co=256
@@ -264,6 +251,7 @@ augroup MyAutoCmd
   au BufRead,BufNewFile *.haml set ft=haml
   au BufRead,BufNewFile *.sass set ft=sass
   au BufRead,BufNewFile *.coffee  set filetype=coffee
+  au BufRead,BufNewFile *.schema set ft=ruby
 
   autocmd BufRead * call s:HighlightSpaces()
   autocmd WinEnter * call s:HighlightSpaces()
