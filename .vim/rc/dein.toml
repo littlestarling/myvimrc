@@ -28,9 +28,6 @@ repo='xoria256.vim'
 repo='vim-ruby/vim-ruby'
 
 [[plugins]]
-repo='tsukkee/unite-help'
-
-[[plugins]]
 repo='kana/vim-textobj-user'
 
 [[plugins]]
@@ -49,13 +46,20 @@ repo='Shougo/neocomplcache'
 repo='Shougo/vimfiler'
 
 [[plugins]]
-repo='Shougo/unite.vim'
-
-[[plugins]]
 repo='h1mesuke/vim-alignta'
 
 [[plugins]]
 repo='h1mesuke/unite-outline'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_path = '.*'
+
+[[plugins]]
+repo='Shougo/unite.vim'
+
+[[plugins]]
+repo='tsukkee/unite-help'
 
 [[plugins]]
 repo='tpope/vim-haml'
@@ -99,3 +103,8 @@ repo='scrooloose/nerdtree'
 [[plugins]]
 repo='jpo/vim-railscasts-theme'
 
+[[plugins]]
+repo='elixir-lang/vim-elixir'
+
+[[plugins]]
+repo='rhysd/committia.vim'
