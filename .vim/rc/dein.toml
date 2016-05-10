@@ -108,3 +108,13 @@ repo='elixir-lang/vim-elixir'
 
 [[plugins]]
 repo='rhysd/committia.vim'
+
+[[plugins]]
+repo='nathanaelkane/vim-indent-guides'
+
+[[plugins]]
+repo='vim-scripts/AnsiEsc.vim'
+
+[[plugins]]
+repo='bronson/vim-trailing-whitespace'
+

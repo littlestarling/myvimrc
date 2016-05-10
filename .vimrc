@@ -33,6 +33,9 @@ if dein#check_install()
   call dein#install()
 endif
 
+" enable indent-guide
+let g:indent_guides_enable_on_vim_startup = 1
+
 if filereadable(expand('~/.vim/recognize_charcode.vim'))
   source ~/.vim/recognize_charcode.vim
 endif
@@ -196,7 +199,7 @@ highlight EOLSpace ctermbg=red guibg=red
 function! s:HighlightSpaces()
   match WideSpace /　/
   match EOLSpace /\s\+$/
-endf
+endfunction
 
 function! s:remove_dust()
   let cursor = getpos(".")
