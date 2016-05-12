@@ -33,8 +33,8 @@ if dein#check_install()
   call dein#install()
 endif
 
-" enable indent-guide
-let g:indent_guides_enable_on_vim_startup = 1
+"" enable indent-guide
+"let g:indent_guides_enable_on_vim_startup = 1
 
 if filereadable(expand('~/.vim/recognize_charcode.vim'))
   source ~/.vim/recognize_charcode.vim
