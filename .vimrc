@@ -1,5 +1,5 @@
 " プラグインが実際にインストールされるディレクトリ
-let s:dein_dir = expand('~/myvimrc/.vim/.cache/dein')
+let s:dein_dir = expand('~/work/myvimrc/.vim/.cache/dein')
 " dein.vim 本体
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
@@ -31,9 +31,10 @@ if dein#load_state(s:dein_dir)
 endif
 
 " もし、未インストールものものがあったらインストール
-if dein#check_install()
+if has('vim_starting') && dein#check_install()
   call dein#install()
 endif
+
 
 "" enable indent-guide
 "let g:indent_guides_enable_on_vim_startup = 1
@@ -249,6 +250,13 @@ let g:vimfiler_safe_mode_by_default = 0
 " yankring
 let g:vimfiler_as_default_explorer = 1
 let g:yankring_manual_clipboard_check = 0
+
+
+" tags
+"let g:vim_tags_project_tags_command = "/opt/brew/bin/ctags -f .tags -R . 2>/dev/null"
+"let g:vim_tags_gems_tags_command = "/opt/brew/bin/ctags -R -f .Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
+"set tags+=.tags
+"set tags+=.Gemfile.lock.tags
 
 augroup MyAutoCmd
   autocmd!

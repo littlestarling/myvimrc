@@ -66,6 +66,9 @@ repo='tsukkee/unite-help'
 repo='tpope/vim-haml'
 
 [[plugins]]
+repo='slim-template/vim-slim'
+
+[[plugins]]
 repo='tpope/vim-rails'
 
 [[plugins]]
@@ -119,3 +122,5 @@ repo='vim-scripts/AnsiEsc.vim'
 [[plugins]]
 repo='bronson/vim-trailing-whitespace'
 
+[[plugins]]
+repo='szw/vim-tags'
